@@ -1,0 +1,24 @@
+version: '3.8'
+
+networks:
+  node-microservices:
+    name: node-microservices
+
+services:
+  mongo:
+    image: mongo:6.0
+    ports:
+      - '8001:27017'
+    networks:
+      - node-microservices
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: vibelydb
+    ports:
+      - '8002:5432'
+    networks:
+      - node-microservices
