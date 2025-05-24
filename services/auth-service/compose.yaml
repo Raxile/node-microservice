@@ -2,9 +2,6 @@ services:
   server:
     build:
       context: .
-    environment:
-      NODE_ENV: production
-      PORT: 8003
-      MONGO_DB_URL: mongodb://mongo:27017/defaultDB
+    env_file: ./.env
     ports:
       - 8003:8003

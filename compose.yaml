@@ -17,7 +17,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: vibelydb
+      POSTGRES_DB: defaultDB
     ports:
       - '8002:5432'
     networks:
