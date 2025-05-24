@@ -26,6 +26,7 @@ services:
   auth-service:
     build:
       context: ./services/auth-service
+      dockerfile: Dockerfile
     volumes:
       - /home/node/app/node_modules/
       - ../scoop-user-frontend:/home/node/app/
