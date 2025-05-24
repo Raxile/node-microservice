@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
- "lint": "eslint . --ext .js,.ts",
-        "lint:fix": "eslint . --ext .js,.ts --fix",
-        "format": "prettier --write \"**/*.{js,ts,json,md}\"",
-        "format:check": "prettier --check \"**/*.{js,ts,json,md}\"",
-        "prepare": "husky"
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "eslint . --ext .js,.ts --fix",
+    "format": "prettier --write \"**/*.{js,ts,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,json,md}\"",
+    "prepare": "husky"
   },
   "author": "PS",
   "license": "ISC",
@@ -22,10 +22,10 @@
     "prettier": "^3.5.3",
     "typescript-eslint": "^8.32.1"
   },
-     "lint-staged": {
-        "**/*.{js,ts}": [
-            "eslint --fix",
-            "prettier --write"
-        ]
-    }
+  "lint-staged": {
+    "**/*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
 }

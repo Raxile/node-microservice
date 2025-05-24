@@ -22,3 +22,16 @@ services:
       - '8002:5432'
     networks:
       - node-microservices
+
+  auth-service:
+    build:
+      context: ./services/auth-service
+    volumes:
+      - /home/node/app/node_modules/
+      - ../scoop-user-frontend:/home/node/app/
+    command: ['npm', 'run', 'start']
+    env_file: ./services/auth-service/.env
+    ports:
+      - '8003:8003'
+    networks:
+      - node-microservices
