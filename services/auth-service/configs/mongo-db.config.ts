@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const connectDB = async (): Promise<void> => {
+const connectMongoDB = async (): Promise<void> => {
   try {
     const dbUrl =
       process.env.MONGO_DB_URL || 'mongodb://localhost:27017/defaultDB';
@@ -8,17 +8,17 @@ const connectDB = async (): Promise<void> => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     } as mongoose.ConnectOptions);
-    console.log('✅ Database connected successfully');
+    console.log('✅ Mongo Database connected successfully');
   } catch (error) {
-    console.log('❌ Database connection failed:', error);
+    console.log('❌ Mongo Database connection failed:', error);
     process.exit(1);
   }
 };
 mongoose.connection.on('connecting', () =>
-  console.log('🔄 Database connecting...')
+  console.log('🔄 Mongo Database connecting...')
 );
 mongoose.connection.on('error', (error: Error) =>
-  console.error('❌ Database error:', error)
+  console.error('❌ Mongo Database error:', error)
 );
 
-export default connectDB;
+export default connectMongoDB;
