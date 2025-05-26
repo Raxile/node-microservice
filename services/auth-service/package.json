@@ -7,7 +7,8 @@
     "build": "npx tsc && npm run copy:generated",
     "start": "node build/app.js",
     "postinstall": "npx prisma generate --schema=prisma/postgres/schema.prisma && npx prisma generate --schema=prisma/mongodb/schema.prisma",
-    "copy:generated": "cp -r generated build/generated"
+    "copy:generated": "cp -r generated build/generated",
+    "reset:postgres": "npx prisma migrate reset --schema=prisma/postgres/schema.prisma"
   },
   "keywords": [],
   "author": "",
