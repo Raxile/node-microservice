@@ -1,11 +1,11 @@
-import userModel from './user-model';
+import { postgresPrisma } from '../../configs/prisma-db.config';
+
 import { TUserPayload } from './user-types';
 
-export const findUserByUsername = async (userName: string) =>
-  userModel.findOne({ userName });
-
 export const findUserByEmail = async (email: string) =>
-  userModel.findOne({ email });
+  await postgresPrisma.user.findUnique({
+    where: { email },
+  });
 
-export const saveUser = async (payload: TUserPayload) =>
-  await userModel.create(payload);
+export const saveUser = async (data: TUserPayload) =>
+  await postgresPrisma.user.create({ data });

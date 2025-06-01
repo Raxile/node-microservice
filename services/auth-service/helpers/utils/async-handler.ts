@@ -7,7 +7,7 @@ const asyncHandler =
   (func: RequestHandler) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      func(req, res, next);
+      await func(req, res, next);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error, error);
