@@ -2,11 +2,10 @@ import './configs/env';
 import express, { Express } from 'express';
 import mainRoutes from './routes';
 import {
-  connectAllPrismaDB,
+  connectPostgresDB,
   disconnectAllPrismaDB,
 } from './configs/prisma-db.config';
 // import connectPostgresDB from './configs/postgres-db.config';
-import connectMongoDB from './configs/mongo-db.config';
 
 const app: Express = express();
 
@@ -17,10 +16,7 @@ app.use('/', mainRoutes);
 
 (async () => {
   try {
-    await connectMongoDB();
-    // await connectPostgresDB();
-
-    await connectAllPrismaDB();
+    await connectPostgresDB();
 
     app.listen(port, () => {
       console.log(`[server]: Server is running at http://localhost:${port}`);
