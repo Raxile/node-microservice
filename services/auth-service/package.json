@@ -4,11 +4,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.ts",
-    "build": "npx tsc && npm run copy:generated",
-    "start": "node build/app.js",
+    "build": "rm -rf build && NODE_ENV=production npx tsc && npm run copy:generated &&  npm run copy:env ",
+    "start": "NODE_ENV=production node build/app.js",
     "postinstall": "npx prisma generate --schema=prisma/postgres/schema.prisma && npx prisma generate --schema=prisma/mongodb/schema.prisma",
     "copy:generated": "cp -r generated build/generated",
-    "reset:postgres": "npx prisma migrate reset --schema=prisma/postgres/schema.prisma"
+    "reset:postgres": "npx prisma migrate reset --schema=prisma/postgres/schema.prisma",
+    "copy:env": "cp -r env.production build.env.production"
   },
   "keywords": [],
   "author": "",
