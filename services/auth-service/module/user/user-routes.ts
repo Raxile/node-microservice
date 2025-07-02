@@ -6,10 +6,24 @@ import { registerUserHandler } from './user-handler';
 
 const userRouter = express.Router();
 
-userRouter.post(
-  '/register',
-  validateRequest.body(registerSchema),
-  asyncHandler(registerUserHandler)
-);
+// userRouter.post(
+//   '/details',
+//   // validateRequest.body(registerSchema),
+//   // asyncHandler(registerUserHandler)
+// );
+
+
+// userRouter.post(
+//   '/sessions',
+//   // validateRequest.body(registerSchema),
+//   // asyncHandler(registerUserHandler)
+// );
+
+// userRouter.post(
+//   '/sessions',
+//   // validateRequest.body(registerSchema),
+//   // asyncHandler(registerUserHandler)
+// );
+
 
 export default userRouter;

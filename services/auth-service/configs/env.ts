@@ -12,3 +12,14 @@ if (fs.existsSync(envPath)) {
   console.warn(`No .env.${env} file found, loading default .env`);
   dotenv.config({ path: path.resolve(__dirname, '../.env') });
 }
+
+
+const ENV = {
+  REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
+  REFRESH_TOKEN_TIME: process.env.REFRESH_TOKEN_TIME,
+  ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
+  ACCESS_TOKEN_TIME: process.env.ACCESS_TOKEN_TIME
+}
+
+
+export default ENV
