@@ -13,3 +13,7 @@ export type TSessionPayload = {
   refreshTokenHash?: string
   expiresAt?: Date
 }
+export type TLoginPayload = {
+  email: string;
+  password: string;
+}

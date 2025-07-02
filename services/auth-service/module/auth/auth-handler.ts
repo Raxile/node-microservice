@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { registerUserService } from "./auth-service";
+import { loginUserService, logoutUserService, registerUserService } from "./auth-service";
 
 export const registerUserHandler = async (req: Request, res: Response) => {
   const response = await registerUserService(req.body);
@@ -8,4 +8,12 @@ export const registerUserHandler = async (req: Request, res: Response) => {
 };
 
 
-export const loginUserHandler = () => { }
+export const loginUserHandler = async (req: Request, res: Response) => {
+  const response = await loginUserService(req.body);
+  res.status(response.statusCode).json(response)
+}
+
+export const logoutUserHandler = async (req: Request, res: Response) => {
+  const response = await logoutUserService((req as any)?.tokenData);
+  res.status(response.statusCode).json(response)
+}

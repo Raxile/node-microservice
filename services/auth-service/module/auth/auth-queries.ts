@@ -1,4 +1,4 @@
-import { UUID } from "crypto";
+
 import { postgresPrisma } from "../../configs/prisma-db.config";
 import { TSessionPayload, TUserPayload } from "../../helpers/types/common.types";
 
@@ -16,3 +16,5 @@ export const updateSessionRefreshHash = async (id: string, data: { refreshTokenH
   where: { id },
   data
 });
+
+export const revokeSession = async (id: string) => await postgresPrisma.session.update({ where: { id }, data: { isRevoked: true } })
