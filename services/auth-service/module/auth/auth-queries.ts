@@ -12,9 +12,10 @@ export const saveUser = async (data: TUserPayload) =>
 
 export const createSession = async (data: TSessionPayload) => await postgresPrisma.session.create({ data })
 
-export const updateSessionRefreshHash = async (id: string, data: { refreshTokenHash: string, expiresAt: Date }) => await postgresPrisma.session.update({
+export const updateSessionRefreshHash = async (id: string, data: { refreshTokenHash: string, expiresAt?: Date }) => await postgresPrisma.session.update({
   where: { id },
   data
 });
 
 export const revokeSession = async (id: string) => await postgresPrisma.session.update({ where: { id }, data: { isRevoked: true } })
+export const getSessionById = async (id: string) => await postgresPrisma.session.findUnique({ where: { id } })

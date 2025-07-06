@@ -1,29 +1,26 @@
 import express from 'express';
-import validateRequest from '../../middleware/validation-request';
-import { registerSchema } from './user-validation-schema';
 import asyncHandler from '../../helpers/utils/async-handler';
-import { registerUserHandler } from './user-handler';
+import { getUserDetailHandler, getUserSessionsHandler, sessionRevokeHandler } from './user-handler';
+import authMiddleware from '../../middleware/auth-middleware';
 
 const userRouter = express.Router();
 
-// userRouter.post(
-//   '/details',
-//   // validateRequest.body(registerSchema),
-//   // asyncHandler(registerUserHandler)
-// );
+userRouter.get(
+    '/',
+    authMiddleware,
+    asyncHandler(getUserDetailHandler)
+);
 
 
-// userRouter.post(
-//   '/sessions',
-//   // validateRequest.body(registerSchema),
-//   // asyncHandler(registerUserHandler)
-// );
+userRouter.get(
+    '/sessions',
+    asyncHandler(getUserSessionsHandler)
+);
 
-// userRouter.post(
-//   '/sessions',
-//   // validateRequest.body(registerSchema),
-//   // asyncHandler(registerUserHandler)
-// );
+userRouter.post(
+    '/sessions/:sessionId/revoke',
+    asyncHandler(sessionRevokeHandler)
+);
 
 
 export default userRouter;
