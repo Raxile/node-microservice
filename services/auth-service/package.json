@@ -4,14 +4,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/app.ts",
-    "build": "rm -rf build && NODE_ENV=production npx tsc && npm run copy:generated &&  npm run copy:env ",
+    "build": "rm -rf build && NODE_ENV=production npx tsc && npm run copy:generated",
     "start": "NODE_ENV=production node build/app.js",
     "postinstall": "npx prisma generate --schema=prisma/postgres/schema.prisma && npx prisma generate --schema=prisma/mongodb/schema.prisma",
     "copy:generated": "cp -r generated build/generated",
     "reset:postgres": "npx prisma migrate reset --schema=prisma/postgres/schema.prisma",
     "copy:env": "cp -r env.production build.env.production",
-    "migrate:dev": "cp .env.development .env && npx prisma migrate dev",
-    "migrate:prod": "cp .env.production .env && npx prisma migrate deploy"
+    "migrate:dev": "cp .env.development .env && npx prisma migrate dev  --schema=prisma/postgres/schema.prisma",
+    "migrate:prod": "cp .env.production .env && npx prisma migrate deploy  --schema=prisma/postgres/schema.prisma"
   },
   "keywords": [],
   "author": "",
@@ -20,13 +20,16 @@
   "dependencies": {
     "@prisma/client": "^6.8.2",
     "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "joi": "^17.13.3",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "postinstall": "^0.11.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.15.21",

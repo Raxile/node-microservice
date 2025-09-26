@@ -1,14 +1,13 @@
-import { ObjectSchema } from 'joi';
-
-import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { ParsedQs } from 'qs';
-import { ParamsDictionary } from 'express-serve-static-core';
+import { ObjectSchema } from "joi";
+import { Request, Response, NextFunction, RequestHandler } from "express";
+import { ParsedQs } from "qs";
+import { ParamsDictionary } from "express-serve-static-core";
 import {
   ERROR_CODES,
   CUSTOM_ERROR_CODES,
-} from '../helpers/constants/status-codes';
-import customResponse from '../helpers/common/common-response';
-import COMMON_MESSAGES from '../helpers/constants/messages/common-messages.json';
+} from "../helpers/constants/status-codes";
+import customResponse from "../helpers/common/common-response";
+import COMMON_MESSAGES from "../helpers/constants/messages/common-messages.json";
 
 interface IValidate {
   <T>(
@@ -26,34 +25,32 @@ interface IValidateRequestPart {
 
 const validateRequest = (() => {
   const validate: IValidate = async (schema, data, req, res, next) => {
-    const parsedBody = await schema.validate(data);
-    if (parsedBody.error) {
-      res
-        .status(ERROR_CODES.BAD_REQUEST)
-        .json(
-          customResponse(
-            CUSTOM_ERROR_CODES.BAD_REQUEST,
-            ERROR_CODES.BAD_REQUEST,
-            parsedBody.error.message || COMMON_MESSAGES.INTERNAL_SERVER_ERROR
-          )
-        );
-      return;
+    try {
+      await schema.validateAsync(data, { abortEarly: false, stripUnknown: true });
+      next();
+    } catch (err: any) {
+      res.status(ERROR_CODES.BAD_REQUEST).json(
+        customResponse(
+          CUSTOM_ERROR_CODES.BAD_REQUEST,
+          ERROR_CODES.BAD_REQUEST,
+          err.details?.map((d: any) => d.message) || [COMMON_MESSAGES.INTERNAL_SERVER_ERROR]
+        )
+      );
     }
-    next();
   };
 
   const body: IValidateRequestPart =
-    (schema) => async (req: Request, res: Response, next: NextFunction) => {
+    (schema) => async (req, res, next) => {
       await validate(schema, req.body, req, res, next);
     };
 
   const params: IValidateRequestPart =
-    (schema) => async (req: Request, res: Response, next: NextFunction) => {
+    (schema) => async (req, res, next) => {
       await validate(schema, req.params, req, res, next);
     };
 
   const query: IValidateRequestPart =
-    (schema) => async (req: Request, res: Response, next: NextFunction) => {
+    (schema) => async (req, res, next) => {
       await validate(schema, req.query, req, res, next);
     };
 

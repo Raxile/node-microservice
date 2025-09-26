@@ -5,11 +5,17 @@ import {
   connectPostgresDB,
   disconnectAllPrismaDB,
 } from './configs/prisma-db.config';
+import cors from "cors";
 // import connectPostgresDB from './configs/postgres-db.config';
 
 const app: Express = express();
 
 const port = process.env.PORT || 8000;
+
+app.use(cors({
+  origin: "*",
+}));
+
 
 app.use(express.json());
 app.use('/', mainRoutes);

@@ -28,3 +28,12 @@ model Session {
   createdAt        DateTime @default(now()) @db.Timestamptz(6)
   expiresAt        DateTime? @db.Timestamptz(6)
 }
+
+model Log {
+  id          String   @id @default(uuid())
+  eventType   String
+  sessionId   String?
+  description String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+}

@@ -35,6 +35,6 @@ services:
       - postgres
     env_file: ./services/auth-service/.env
     ports:
-      - '8003:8003'
+      - '8003:8000'
     networks:
       - node-microservices
